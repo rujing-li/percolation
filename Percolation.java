@@ -3,13 +3,13 @@
  *  Last modified:     Nov/2020
  **************************************************************************** */
 
-import edu.princeton.cs.algs4.QuickFindUF;
+import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
     private boolean[][] grid;
     private int n;
-    private QuickFindUF sites;
-    // private WeightedQuickUnionUF
+    // private QuickFindUF sites;
+    private WeightedQuickUnionUF sites;
 
     // creates n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
@@ -23,7 +23,8 @@ public class Percolation {
         //         System.out.println(col);
 
         // creates sites for the grid, contains two virtual sites
-        sites = new QuickFindUF(n * n + 2);
+        // sites = new QuickFindUF(n * n + 2);
+        sites = new WeightedQuickUnionUF(n * n + 2);
         // union all in top rows to the first virtual site
         for (int i = 0; i < n; i++)
             sites.union(n * n, i);

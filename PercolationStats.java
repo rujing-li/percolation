@@ -5,6 +5,7 @@
 
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
+import edu.princeton.cs.algs4.Stopwatch;
 
 public class PercolationStats {
     private double[] trials;
@@ -47,7 +48,7 @@ public class PercolationStats {
 
     // test client (see below)
     public static void main(String[] args) {
-
+        Stopwatch timer = new Stopwatch();
         int n = Integer.parseInt(args[0]);
         int numOfTrials = Integer.parseInt(args[1]);
         PercolationStats percStats = new PercolationStats(n, numOfTrials);
@@ -55,7 +56,8 @@ public class PercolationStats {
         System.out.printf("%-25s = %f%n", "stddev", percStats.stddev());
         System.out.printf("%-25s = [%f, %f]%n", "95% confidence interval", percStats.confidenceLo(),
                           percStats.confidenceHi());
-
+        System.out.printf("n = %d, trials = %d, time taken = %.5f seconds%n", n, numOfTrials,
+                          timer.elapsedTime());
 
     }
 
