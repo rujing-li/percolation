@@ -6,10 +6,14 @@
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
+
+    final int n;
+    // final QuickFindUF sites;
+    final WeightedQuickUnionUF sites;
     private boolean[][] grid;
-    private int n;
-    // private QuickFindUF sites;
-    private WeightedQuickUnionUF sites;
+    private int numOfOpenSites = 0;
+
+    // TODO: private helper method of converting 2d to 1d
 
     // creates n-by-n grid, with all sites initially blocked
     public Percolation(int n) {
@@ -47,6 +51,7 @@ public class Percolation {
         if (col != n && isOpen(row, col + 1)) sites.union(curr, right);
         if (row != 1 && isOpen(row - 1, col)) sites.union(curr, up);
         if (row != n && isOpen(row + 1, col)) sites.union(curr, down);
+        numOfOpenSites++;
     }
 
 
@@ -67,11 +72,7 @@ public class Percolation {
 
     // returns the number of open sites
     public int numberOfOpenSites() {
-        int num = 0;
-        for (boolean[] j : grid)
-            for (boolean i : j)
-                if (i) num++;
-        return num;
+        return numOfOpenSites;
     }
 
     // does the system percolate?

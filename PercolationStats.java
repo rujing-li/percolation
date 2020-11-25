@@ -5,20 +5,21 @@
 
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
-import edu.princeton.cs.algs4.Stopwatch;
+// import edu.princeton.cs.algs4.Stopwatch;
 
 public class PercolationStats {
-    private double[] trials;
+    final double[] trials;
+    static final double CONFIDENCE_95 = 1.96;
 
     // perform independent trials on an n-by-n grid
-    public PercolationStats(int n, int T) {
+    public PercolationStats(int n, int t) {
         if (n < 0)
             throw new IllegalArgumentException("n of the grid should be a positive integer.");
-        if (T < 0)
+        if (t < 0)
             throw new IllegalArgumentException(
                     "number of trails should be a positive integer.");
-        trials = new double[T];
-        for (int i = 0; i < T; ++i) {
+        trials = new double[t];
+        for (int i = 0; i < t; ++i) {
             Percolation perc = new Percolation(n);
             while (!perc.percolates())
                 perc.open(StdRandom.uniform(n) + 1, StdRandom.uniform(n) + 1);
@@ -38,17 +39,17 @@ public class PercolationStats {
 
     // low endpoint of 95% confidence interval
     public double confidenceLo() {
-        return mean() - 1.96 * stddev() / Math.sqrt(trials.length);
+        return mean() - CONFIDENCE_95 * stddev() / Math.sqrt(trials.length);
     }
 
     // high endpoint of 95% confidence interval
     public double confidenceHi() {
-        return mean() + 1.96 * stddev() / Math.sqrt(trials.length);
+        return mean() + CONFIDENCE_95 * stddev() / Math.sqrt(trials.length);
     }
 
     // test client (see below)
     public static void main(String[] args) {
-        Stopwatch timer = new Stopwatch();
+        // Stopwatch timer = new Stopwatch();
         int n = Integer.parseInt(args[0]);
         int numOfTrials = Integer.parseInt(args[1]);
         PercolationStats percStats = new PercolationStats(n, numOfTrials);
@@ -56,8 +57,8 @@ public class PercolationStats {
         System.out.printf("%-25s = %f%n", "stddev", percStats.stddev());
         System.out.printf("%-25s = [%f, %f]%n", "95% confidence interval", percStats.confidenceLo(),
                           percStats.confidenceHi());
-        System.out.printf("n = %d, trials = %d, time taken = %.5f seconds%n", n, numOfTrials,
-                          timer.elapsedTime());
+        // System.out.printf("n = %d, trials = %d, time taken = %.5f seconds%n", n, numOfTrials,
+        // timer.elapsedTime());
 
     }
 
