@@ -8,8 +8,10 @@ import edu.princeton.cs.algs4.StdStats;
 // import edu.princeton.cs.algs4.Stopwatch;
 
 public class PercolationStats {
-    final double[] trials;
-    static final double CONFIDENCE_95 = 1.96;
+    private final double[] trials;
+    // static final double CONFIDENCE_95 = 1.96;
+    private final double CONFIDENCE_95 = 1.96;
+
 
     // perform independent trials on an n-by-n grid
     public PercolationStats(int n, int t) {
