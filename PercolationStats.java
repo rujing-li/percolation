@@ -8,6 +8,7 @@ import edu.princeton.cs.algs4.StdStats;
 // import edu.princeton.cs.algs4.Stopwatch;
 
 public class PercolationStats {
+    // the course grader does not only allow static variables
     private final double[] trials;
     // static final double CONFIDENCE_95 = 1.96;
     private final double CONFIDENCE_95 = 1.96;
@@ -15,9 +16,9 @@ public class PercolationStats {
 
     // perform independent trials on an n-by-n grid
     public PercolationStats(int n, int t) {
-        if (n < 0)
+        if (n <= 0)
             throw new IllegalArgumentException("n of the grid should be a positive integer.");
-        if (t < 0)
+        if (t <= 0)
             throw new IllegalArgumentException(
                     "number of trails should be a positive integer.");
         trials = new double[t];
@@ -36,6 +37,7 @@ public class PercolationStats {
 
     // sample standard deviation of percolation threshold
     public double stddev() {
+        if (trials.length == 1) return Double.NaN;
         return StdStats.stddev(trials);
     }
 
